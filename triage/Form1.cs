@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -6,32 +7,31 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace cleartools
+namespace triage
 {
-    public partial class clearTools : Form
+    public partial class Form1 : Form
     {
-
-        public clearTools()
+        // list ex
+        public string extension;
+        public Form1()
         {
             InitializeComponent();
-            updateBar.LinkClicked += linkLabel1_LinkClicked;
-
         }
 
-        public string extension;
-
-        private void clearTools_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-
-            string version = "0.1";
-            string responeText = new WebClient().DownloadString("https://phpupdate.herokuapp.com/test.txt");
+            string version = "0.1.1";
+            string responeText = new WebClient().DownloadString("https://phpupdate.herokuapp.com/version.txt");
             responeText = responeText.Replace("\n", "");
             if (responeText != version)
             {
                 string test = responeText;
+                updateBtn.Visible = true;
                 updateBar.Text = "Доступно новое обновление";
             }
             else
@@ -50,7 +50,7 @@ namespace cleartools
         {
             FileInfo fi = new FileInfo(e.FullPath);
             string[] extensions = extension.Split(",");
-            foreach(var k in extensions)
+            foreach (var k in extensions)
             {
                 if (fi.Extension == k)
                 {
@@ -61,7 +61,9 @@ namespace cleartools
                         case ".avi":
                             path = labelVideo.Text;
                             break;
-                        case ".txt":
+                        case ".png":
+                        case ".jpg":
+                        case ".jpeg":
                             path = labelImg.Text;
                             break;
                         case ".rtf":
@@ -75,37 +77,21 @@ namespace cleartools
                             path = "0";
                             break;
                     }
-                    File.Move(e.FullPath, @$"{path}\{e.Name}");
+                    try
+                    {
+                        File.Move(e.FullPath, @$"{path}\{e.Name}");
 
+                    }
+                    catch(DirectoryNotFoundException)
+                    {
+                        this.Invoke((Action)(() => path = infoMenu.Text = "Directory not found"));
+                    }
 
                 }
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            MonitorDesktop(desktopPath);
-            extension = "";
-            if (imgBox.Checked)
-            {
-                extension += ".txt,";
-            }
-            if (docBox.Checked)
-            {
-                extension += ".rtf,";
-            }
-            if (videoBox.Checked)
-            {
-                extension += ".mp4,";
-            }
-            if (exeBox.Checked)
-            {
-                extension += ".exe,.lnk,";
-            }
-        }
         private void selectPath_Click(object sender, EventArgs e)
         {
-
             FolderBrowserDialog FBD = new FolderBrowserDialog();
             if (FBD.ShowDialog() == DialogResult.OK)
             {
@@ -129,23 +115,37 @@ namespace cleartools
             }
         }
 
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            
+            MonitorDesktop(desktopPath);
+
+            extension = "";
+            if (imgBox.Checked)
+            {
+                extension += ".png,.jpg,.jpeg";
+            }
+            if (docBox.Checked)
+            {
+                extension += ".rtf,";
+            }
+            if (videoBox.Checked)
+            {
+                extension += ".mp4,";
+            }
+            if (exeBox.Checked)
+            {
+                extension += ".exe,.lnk,";
+            }
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", "http://phpupdate.herokuapp.com/triage(x64)-setup.exe");
+        }
+
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void docPath_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            // Navigate to a URL.
-            System.Diagnostics.Process.Start("http://metanit.com");
-        }
-
-        private void clearTools_Load_1(object sender, EventArgs e)
         {
 
         }

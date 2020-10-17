@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace cleartools
+namespace triage
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace cleartools
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new clearTools());
+            Application.Run(new Form1());
         }
     }
 }

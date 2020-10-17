@@ -1,6 +1,6 @@
-﻿namespace cleartools
+﻿namespace triage
 {
-    partial class clearTools
+    partial class Form1
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(clearTools));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.selectPath = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelImg = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveBtn = new System.Windows.Forms.Button();
             this.docBox = new System.Windows.Forms.CheckBox();
             this.docPath = new System.Windows.Forms.Button();
             this.labelDoc = new System.Windows.Forms.Label();
@@ -43,7 +43,9 @@
             this.exePath = new System.Windows.Forms.Button();
             this.labelExe = new System.Windows.Forms.Label();
             this.imgBox = new System.Windows.Forms.CheckBox();
-            this.updateBar = new System.Windows.Forms.LinkLabel();
+            this.updateBar = new System.Windows.Forms.Label();
+            this.updateBtn = new System.Windows.Forms.Button();
+            this.infoMenu = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // selectPath
@@ -73,15 +75,15 @@
             this.labelImg.TabIndex = 3;
             this.labelImg.Text = "Выберите путь";
             // 
-            // button1
+            // saveBtn
             // 
-            this.button1.Location = new System.Drawing.Point(465, 272);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Сохранить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.saveBtn.Location = new System.Drawing.Point(465, 272);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(75, 23);
+            this.saveBtn.TabIndex = 4;
+            this.saveBtn.Text = "Сохранить";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // docBox
             // 
@@ -183,19 +185,39 @@
             // updateBar
             // 
             this.updateBar.AutoSize = true;
-            this.updateBar.Location = new System.Drawing.Point(10, 288);
+            this.updateBar.Location = new System.Drawing.Point(12, 288);
             this.updateBar.Name = "updateBar";
             this.updateBar.Size = new System.Drawing.Size(61, 15);
             this.updateBar.TabIndex = 8;
-            this.updateBar.TabStop = true;
             this.updateBar.Text = "updateBar";
-            this.updateBar.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // clearTools
+            // updateBtn
+            // 
+            this.updateBtn.Location = new System.Drawing.Point(384, 272);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(75, 23);
+            this.updateBtn.TabIndex = 9;
+            this.updateBtn.Text = "Обновить";
+            this.updateBtn.UseVisualStyleBackColor = true;
+            this.updateBtn.Visible = false;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
+            // 
+            // infoMenu
+            // 
+            this.infoMenu.AutoSize = true;
+            this.infoMenu.Location = new System.Drawing.Point(333, 276);
+            this.infoMenu.Name = "infoMenu";
+            this.infoMenu.Size = new System.Drawing.Size(0, 15);
+            this.infoMenu.TabIndex = 10;
+            this.infoMenu.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 312);
+            this.Controls.Add(this.infoMenu);
+            this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.updateBar);
             this.Controls.Add(this.imgBox);
             this.Controls.Add(this.labelExe);
@@ -207,14 +229,14 @@
             this.Controls.Add(this.labelDoc);
             this.Controls.Add(this.docPath);
             this.Controls.Add(this.docBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.labelImg);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "clearTools";
-            this.Text = "updateBar";
-            this.Load += new System.EventHandler(this.clearTools_Load);
+            this.Name = "Form1";
+            this.Text = "triage";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,7 +245,7 @@
         #endregion
         private System.Windows.Forms.Button selectPath;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Label path_img;
         private System.Windows.Forms.Label labelImg;
         private System.Windows.Forms.CheckBox docBox;
@@ -236,7 +258,9 @@
         private System.Windows.Forms.CheckBox imgBox;
         public System.Windows.Forms.Button docPath;
         public System.Windows.Forms.Button videoPath;
-        private System.Windows.Forms.LinkLabel updateBar;
+        private System.Windows.Forms.Label updateBar;
+        private System.Windows.Forms.Button updateBtn;
+        private System.Windows.Forms.Label infoMenu;
     }
 }
 
